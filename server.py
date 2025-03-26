@@ -20,7 +20,8 @@ config_path = './config.json'       # 设置PDF2zh配置文件路径
 babeldoc = False                     # 是否使用babeldoc
 
 source_languages = 'en'             # 设置源语言
-target_languages = 'zh'             # 设置目标语言
+#target_languages = 'zh'             # 设置目标语言
+target_languages = 'ja'             # 设置目标语言
 
 global_translated_dir = translated_dir
 ##########################################################################################
@@ -106,13 +107,18 @@ def translate_pdf(input_path, config):
         '--output', config.translated_dir,
         '--service', config.service,
         '--lang-in', config.source_languages, 
-        '--lang-out', config.target_languages 
+        '--lang-out', config.target_languages,
+        '--ignore-cache'
     ]
     if os.path.exists(config.config_path):
         command.append('--config')
         command.append(config.config_path)
+    if os.path.exists('prompt.txt'):
+        command.append('--prompt')
+        command.append('prompt.txt')
     if config.babeldoc:
         command.append('--babeldoc')
+    print(f'Launching pdf2zh: {command}')
     subprocess.run(command, check=False)
 
     mono =  os.path.join(config.translated_dir, os.path.basename(input_path).replace('.pdf', '-mono.pdf'))

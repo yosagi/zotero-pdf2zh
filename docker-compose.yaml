@@ -1,18 +1,43 @@
+configs:
+  config_json:
+    content: |
+      {
+      "USE_MODELSCOPE": "0",
+      "translators": [
+        {
+            "name": "ollama",
+            "envs": {
+                "OLLAMA_HOST": "http://${OLLAMA_HOST:-127.0.0.1}:11434",
+                "OLLAMA_MODEL": "${OLLAMA_MODEL:-gemma3:27b}"
+            }
+        }
+      ]
+      }
+  prompt:
+    content: |
+      You are a professional, authentic machine translation engine. Only Output the translated text, do not include any other text.
+      Translate the following markdown source text to Japanese using the plain form(常体). Keep the formula notation {v*} unchanged. Output translation directly without any additional text.
+      Source Text: $${text}
+      Translated Text:
+
 services:
     zotero-pdf2zh:
         build:
             context: .
             dockerfile: Dockerfile
-            args:
-                - ZOTERO_PDF2ZH_FROM_IMAGE=byaidu/pdf2zh:1.9.5
-                - ZOTERO_PDF2ZH_SERVER_FILE_DOWNLOAD_URL=https://raw.githubusercontent.com/guaguastandup/zotero-pdf2zh/refs/tags/v2.2.3/server.py
         container_name: zotero-pdf2zh
         restart: unless-stopped
         ports:
             - 8888:8888
         environment:
-            - TZ=Asia/Shanghai
-            - HF_ENDPOINT=https://hf-mirror.com
+            - TZ=Asia/Tokyo
         volumes:
-            - ./zotero-pdf2zh/translated:/app/translated
-            - ./zotero-pdf2zh/config.json:/app/config.json
+            - pdf2zh_translated:/app/translated
+        configs:
+          - source: config_json
+            target: /app/config.json
+          - source: prompt
+            target: /app/prompt.txt
+volumes:
+    pdf2zh_translated:
+
