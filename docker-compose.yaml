@@ -25,6 +25,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
+        image: zotero-pdf2zh
         container_name: zotero-pdf2zh
         restart: unless-stopped
         ports:
