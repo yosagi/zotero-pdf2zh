@@ -11,7 +11,9 @@ RUN apt-get update && \
     uv pip install --system -U flask waitress pypdf && \
     rm -rf /var/lib/apt/lists/*
 COPY pdf2zh/ .
-RUN uv pip install --system --no-cache . && babeldoc --version && babeldoc --warmup
+RUN uv pip install --system --no-cache . && \
+    uv pip install --system --no-cache "numpy<2.0" && \
+    babeldoc --version && babeldoc --warmup
 
 #ADD "https://github.com/timelic/source-han-serif/releases/download/main/SourceHanSerifJP-Regular.ttf" /app/
 COPY server.py /app/
