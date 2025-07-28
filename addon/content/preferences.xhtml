@@ -29,6 +29,7 @@
                 <html:select id="zotero-prefpane-__addonRef__-engineselect" style="width: 120px;"
                     preference="extensions.zotero.__addonRef__.engineselect">
                     <html:option value="pdf2zh">pdf2zh</html:option>
+                    <html:option value="pdf2zh_next">pdf2zh_next</html:option>
                     <!-- <html:option value="EbookTranslator">EbookTranslator</html:option> -->
                 </html:select>
             </hbox>
@@ -54,7 +55,7 @@
                     <html:option value="azure-openai">azure-openai</html:option>
                     <html:option value="zhipu">zhipu</html:option>
 
-                    <html:option value="ModelScope">ModelScope</html:option>
+                    <html:option value="modelscope">modelscope</html:option>
                     <html:option value="silicon">silicon</html:option>
                     <html:option value="gemini">gemini</html:option>
                     <html:option value="azure">azure</html:option>
@@ -91,10 +92,20 @@
             <html:input type="text" id="zotero-prefpane-__addonRef__-configPath"
                 preference="extensions.zotero.__addonRef__.configPath" style="width: 300px"></html:input>
         </vbox>
+        <hbox align="left">
+            <html:label for="zotero-prefpane-__addonRef__-skip-last-pages" data-l10n-id="pref-skip-last-pages"></html:label>
+            <html:input type="text" id="zotero-prefpane-__addonRef__-skip-last-pages"
+                preference="extensions.zotero.__addonRef__.skip-last-pages" style="width: 50px"></html:input>
+        </hbox>
         <hbox>
             <checkbox native="true" id="zotero-prefpane-__addonRef__-rename"
                 preference="extensions.zotero.__addonRef__.rename" />
             <html:label data-l10n-id="pref-rename" for="zotero-prefpane-__addonRef__-rename" />
+        </hbox>
+        <hbox>
+            <checkbox native="true" id="zotero-prefpane-__addonRef__-skip-subset-fonts"
+                preference="extensions.zotero.__addonRef__.skip-subset-fonts" />
+            <html:label data-l10n-id="pref-skip-subset-fonts" for="zotero-prefpane-__addonRef__-skip-subset-fonts" />
         </hbox>
         <hbox>
             <checkbox native="true" id="zotero-prefpane-__addonRef__-babeldoc"
@@ -144,13 +155,21 @@
                 preference="extensions.zotero.__addonRef__.compare-open" />
             <html:label data-l10n-id="pref-open" for="zotero-prefpane-__addonRef__-compare-open" />
         </hbox>
+        <hbox>
+            <checkbox native="false" id="zotero-prefpane-__addonRef__-single-compare"
+                preference="extensions.zotero.__addonRef__.single-compare" />
+            <html:label data-l10n-id="pref-single-compare" for="zotero-prefpane-__addonRef__-singel-compare" />
+            <checkbox native="false" id="zotero-prefpane-__addonRef__-single-compare-open"
+                preference="extensions.zotero.__addonRef__.single-compare-open" />
+            <html:label data-l10n-id="pref-open" for="zotero-prefpane-__addonRef__-single-compare-open" />
+        </hbox>
     </vbox>
 
     <!-- 说明 -->
     <vbox>
         <html:h3>Python Server 脚本 </html:h3>
         <p>🌷 温馨提示: 本插件需要使用终端或docker执行Python脚本，才可以使用翻译功能。</p>
-        <p>🌷 [2025年4月1日v2.3.3] Python脚本已更新，请访问主页README.md进行更新:
+        <p>🌷 [2025年6月12日v2.4.3] Python脚本已更新，支持pdf2zh_next翻译引擎，请访问主页README.md进行更新:
             <description align="center"><label class="zotero-text-link" value="README.md"
                     href="https://github.com/guaguastandup/zotero-pdf2zh"></label></description>
         </p>
