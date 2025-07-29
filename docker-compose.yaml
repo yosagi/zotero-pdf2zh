@@ -8,15 +8,18 @@ configs:
             "name": "ollama",
             "envs": {
                 "OLLAMA_HOST": "http://${OLLAMA_HOST:-127.0.0.1}:11434",
-                "OLLAMA_MODEL": "${OLLAMA_MODEL:-gemma3:27b}"
+      "OLLAMA_MODEL": "${OLLAMA_MODEL:-aya-expanse:32b}"
             }
         }
       ]
       }
   prompt:
     content: |
-      You are a professional, authentic machine translation engine. Only Output the translated text, do not include any other text.
-      Translate the following markdown source text to Japanese using the plain form(常体). Keep the formula notation {v*} unchanged. Output translation directly without any additional text.
+      あなたはプロフェッショナルで正確な機械翻訳エンジンです。
+      以下のmarkdownテキストを日本語に翻訳してください。
+      文体はすべて常態とし、敬体(ですます調)は使わないでください。
+      テキストに{v0}や{v1}などが含まれていた場合、これは数式のプレースホルダです。これらはそのまま出力してください。存在しない場合は追加しないでください。
+      翻訳結果のみを出力し、他のテキストは含めないでください。
       Source Text: $${text}
       Translated Text:
 
